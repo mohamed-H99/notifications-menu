@@ -7,7 +7,7 @@
   --clr-royal-blue: #3475dd;
   --clr-white-smoke: #f6f6f6;
 
-  --clr-primary: var(--clr-brandeis-blue);
+  --clr-primary: var(--clr-royal-blue);
 
   --text-md: 1rem;
   --text-sm: 0.875rem;
@@ -19,6 +19,9 @@
   --rounded-full: 9999px;
 
   --shadow: 0 1px 4px 1px #ddd;
+
+  --effect: ease-in;
+  --duration: 0.1s;
 }
 
 *,
@@ -82,6 +85,10 @@ main {
 .notifi-menu__header-text,
 .notifi-menu__footer-text {
   border-bottom: 2px solid transparent;
+  transition: border var(--effect) var(--duration);
+}
+.notifi-menu__footer-text {
+  font-weight: 600;
 }
 .notifi-menu__header-link:hover .notifi-menu__header-text,
 .notifi-menu__footer-link:hover .notifi-menu__footer-text {
@@ -101,6 +108,7 @@ main {
   border-radius: var(--rounded);
   position: relative;
   overflow: hidden;
+  transition: background var(--effect) var(--duration);
 }
 .notifi-menu__item:hover {
   background-color: var(--clr-white-smoke);
@@ -111,6 +119,7 @@ main {
   text-align: center;
   opacity: 0.7;
   font-size: var(--text-sm);
+  transition: none;
 }
 .notifi-menu__item--empty:hover {
   background-color: transparent !important;
@@ -124,8 +133,10 @@ main {
 }
 .notifi-menu__item:hover .notifi-menu__item-title {
   color: var(--clr-primary);
+  font-weight: normal;
 }
 .notifi-menu__item-dot {
+  opacity: 0;
   display: inline-block;
   width: 0.5rem;
   min-width: 0.5rem;
@@ -138,12 +149,17 @@ main {
   align-items: baseline;
   gap: 1rem;
 }
-.notifi-menu__item-details {
-}
 
 .notifi-menu__item-title {
   font-size: var(--text-sm);
-  font-weight: 600;
+  font-weight: normal;
+  transition: color var(--effect) var(--duration);
+}
+.notifi-menu__item.new .notifi-menu__item-dot {
+  opacity: 1;
+}
+.notifi-menu__item.new .notifi-menu__item-title {
+  font-weight: bold;
 }
 .notifi-menu__item-subtitle {
   font-size: var(--text-xs);
@@ -151,6 +167,7 @@ main {
   margin: 0.5rem 0 0;
   opacity: 0.7;
   display: inline-block;
+  pointer-events: none;
 }
 .notifi-menu__item-user:after {
   content: "";
@@ -197,10 +214,3 @@ main {
   align-items: center;
   gap: 0.25rem;
 }
-
-/* .notifi-menu__footer-text {
-  border-bottom: 2px solid transparent;
-}
-.notifi-menu__footer-link:hover .notifi-menu__footer-text {
-  border-color: var(--clr-primary);
-} */
